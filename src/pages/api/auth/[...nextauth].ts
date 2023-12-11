@@ -9,4 +9,14 @@ export default NextAuth({
       issuer: process.env.COGNITO_ISSUER,
     }),
   ],
+
+  callbacks: {
+    //これでsessionにuserIdも追加できる
+    async session({ session, token }) {
+      if (token) {
+        session.userId = token.sub; // ここでCognitoのsubをセッションに追加
+      }
+      return session;
+    },
+  },
 });

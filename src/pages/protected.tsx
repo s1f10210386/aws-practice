@@ -2,7 +2,9 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 const Home = () => {
   const { data: session, status } = useSession();
-
+  const currentID = () => {
+    console.log(session);
+  };
   if (status === "loading") {
     return null;
   }
@@ -11,6 +13,7 @@ const Home = () => {
     return (
       <>
         Signed in as {session?.user?.email} <br />
+        <div>userId:{session.userId}</div>
         <button onClick={() => signOut()}>Sign Out</button>
       </>
     );
