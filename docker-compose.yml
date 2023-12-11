@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000" # MinIO APIのポート
+      - "9001:9001" # MinIO Consoleのポート
+    volumes:
+      - minio_data:/data
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER} # ユーザー名を設定
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}  # パスワードを設定
+    command: server /data --console-address ":9001"
+volumes:
+  minio_data:
