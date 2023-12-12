@@ -35,7 +35,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    const file = files.file as unknown as formidable.File;
+    //一応送れるけど単一のファイルのみ！
+    const file = files.file[0] as formidable.File;
     console.log("ファイルパス:", file.filepath); // ファイルパスをログ出力
 
     if (!file.filepath) {
